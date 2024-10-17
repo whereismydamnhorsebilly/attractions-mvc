@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+
+    <changeSet id="1" author="alexN">
+        <createTable tableName="settlement">
+            <column name="id" type="serial">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="name" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="population" type="int">
+                <constraints nullable="false"/>
+            </column>
+            <column name="has_metro" type="boolean"/>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="2" author="alexN">
+        <createTable tableName="service_option">
+            <column name="id" type="serial">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="name" type="varchar(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="about_service" type="text"/>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="3" author="alexN">
+        <createTable tableName="attraction">
+            <column name="id" type="serial">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="name" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="creation_date" type="date"/>
+            <column name="about_attraction" type="text"/>
+            <column name="attraction_type" type="varchar(50)"/>
+
+            <column name="settlement_id" type="int">
+                <constraints nullable="false" foreignKeyName="fk_attraction_settlement" references="settlement(id)"/>
+            </column>
+            <column name="service_option_id" type="int">
+                <constraints nullable="false" foreignKeyName="fk_attraction_service_option" references="service_option(id)"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+</databaseChangeLog>
