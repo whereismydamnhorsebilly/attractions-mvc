@@ -1,7 +1,6 @@
 package com.springApp.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import com.springApp.dto.attractionDto.AboutAttractionDto;
 import com.springApp.dto.attractionDto.AttractionDtoToGet;
 import com.springApp.dto.attractionDto.AttractionDtoToShow;
@@ -43,9 +42,10 @@ class AttractionsControllerTest {
     @Mock
     private BindingResultHandler bindingResultHandler;
 
-    private MockMvc mockMvc;
+    @Mock
+    private ObjectMapper objectMapper;
 
-    private ObjectMapper objectMapper = new ObjectMapper();
+    private MockMvc mockMvc;
 
     AttractionDtoToShow testAttractionDtoToShow = new AttractionDtoToShow();
     List<AttractionDtoToShow> testAttractionDtoList = new ArrayList<>();
@@ -55,7 +55,7 @@ class AttractionsControllerTest {
     @BeforeEach
     void setUp() {
         mockMvc = MockMvcBuilders.standaloneSetup(controller).build();
-        objectMapper.registerModule(new JavaTimeModule());
+        objectMapper = new ObjectMapper();
 
         testSettlement.setName(settlementName);
         testAttractionDtoToShow.setAttractionType(AttractionType.MUSEUM);
@@ -117,7 +117,7 @@ class AttractionsControllerTest {
     @Test
     void updateAttractionTest() throws Exception {
         AboutAttractionDto aboutAttractionDto = new AboutAttractionDto();
-        int attractionId = 1;
+        Integer attractionId = 1;
 
         String attractionJson = objectMapper.writeValueAsString(aboutAttractionDto);
 
@@ -133,7 +133,7 @@ class AttractionsControllerTest {
      */
     @Test
     void deleteAttractionTest() throws Exception {
-        int attractionId = 1;
+        Integer attractionId = 1;
 
         mockMvc.perform(delete("/api/attractions/{id}/remove", attractionId)
                         .param("id", String.valueOf(attractionId)))

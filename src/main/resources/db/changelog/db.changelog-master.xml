@@ -6,6 +6,11 @@
         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
 
     <changeSet id="1" author="alexN">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="settlement"/>
+            </not>
+        </preConditions>
         <createTable tableName="settlement">
             <column name="id" type="serial">
                 <constraints primaryKey="true" nullable="false"/>
@@ -21,6 +26,11 @@
     </changeSet>
 
     <changeSet id="2" author="alexN">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="service_option"/>
+            </not>
+        </preConditions>
         <createTable tableName="service_option">
             <column name="id" type="serial">
                 <constraints primaryKey="true" nullable="false"/>
@@ -33,6 +43,11 @@
     </changeSet>
 
     <changeSet id="3" author="alexN">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="attraction"/>
+            </not>
+        </preConditions>
         <createTable tableName="attraction">
             <column name="id" type="serial">
                 <constraints primaryKey="true" nullable="false"/>

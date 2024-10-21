@@ -68,11 +68,10 @@ class SettlementControllerTest {
     @Test
     void updatePopulationTest() throws Exception {
         SettlementPopulationDto testSettlementPopulationDto = new SettlementPopulationDto();
-        int settlementId = 1;
 
         String populationJson = objectMapper.writeValueAsString(testSettlementPopulationDto);
 
-        mockMvc.perform(patch("/api/settlements/{id}/population", settlementId)
+        mockMvc.perform(patch("/api/settlements/{id}/population", 1)
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(populationJson))
                 .andExpect(status().isOk());
@@ -85,11 +84,10 @@ class SettlementControllerTest {
     @Test
     void updateMetroTest() throws Exception {
         SettlementHasMetroDto testSettlementMetroDto = new SettlementHasMetroDto();
-        int settlementId = 1;
 
         String populationJson = objectMapper.writeValueAsString(testSettlementMetroDto);
 
-        mockMvc.perform(patch("/api/settlements/{id}/metro", settlementId)
+        mockMvc.perform(patch("/api/settlements/{id}/metro", 1)
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(populationJson))
                 .andExpect(status().isOk());

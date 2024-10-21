@@ -12,32 +12,29 @@
     <maven.compiler.source>17</maven.compiler.source>
     <maven.compiler.target>17</maven.compiler.target>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <spring.version>5.3.23</spring.version>
   </properties>
 
   <dependencies>
-    <dependency>
-      <groupId>junit</groupId>
-      <artifactId>junit</artifactId>
-      <version>3.8.1</version>
-      <scope>test</scope>
-    </dependency>
 
+    <!-- https://mvnrepository.com/artifact/org.springframework/spring-webmvc -->
     <dependency>
       <groupId>org.springframework</groupId>
       <artifactId>spring-webmvc</artifactId>
-      <version>5.3.23</version>
+      <version>${spring.version}</version>
     </dependency>
 
+    <!-- https://mvnrepository.com/artifact/org.springframework/spring-orm -->
     <dependency>
       <groupId>org.springframework</groupId>
       <artifactId>spring-orm</artifactId>
-      <version>5.3.18</version>
+      <version>${spring.version}</version>
     </dependency>
 
     <dependency>
       <groupId>org.hibernate</groupId>
       <artifactId>hibernate-core</artifactId>
-      <version>5.6.10.Final</version>
+      <version>5.6.15.Final</version>
     </dependency>
 
     <dependency>
@@ -52,11 +49,11 @@
       <version>42.5.1</version>
     </dependency>
 
-    <dependency>
-      <groupId>com.mchange</groupId>
-      <artifactId>c3p0</artifactId>
-      <version>0.9.5.5</version>
-    </dependency>
+<!--    <dependency>-->
+<!--      <groupId>com.mchange</groupId>-->
+<!--      <artifactId>c3p0</artifactId>-->
+<!--      <version>0.9.5.5</version>-->
+<!--    </dependency>-->
 
     <dependency>
       <groupId>org.aspectj</groupId>
@@ -83,7 +80,6 @@
       <artifactId>jackson-datatype-jsr310</artifactId>
       <version>2.14.2</version>
     </dependency>
-
 
     <!-- https://mvnrepository.com/artifact/org.hibernate.validator/hibernate-validator -->
     <dependency>
@@ -116,7 +112,7 @@
     <dependency>
       <groupId>org.liquibase</groupId>
       <artifactId>liquibase-core</artifactId>
-      <version>4.8.0</version>
+      <version>4.24.0</version>
     </dependency>
 
     <!-- https://mvnrepository.com/artifact/org.junit.jupiter/junit-jupiter-api -->
@@ -155,7 +151,7 @@
     <dependency>
       <groupId>org.springframework</groupId>
       <artifactId>spring-test</artifactId>
-      <version>5.3.23</version>
+      <version>${spring.version}</version>
       <scope>test</scope>
     </dependency>
 
@@ -174,19 +170,26 @@
       <version>2.9.0</version>
     </dependency>
 
-    <!-- https://mvnrepository.com/artifact/org.slf4j/slf4j-simple -->
-    <dependency>
-      <groupId>org.slf4j</groupId>
-      <artifactId>slf4j-simple</artifactId>
-      <version>2.0.9</version>
-      <scope>test</scope>
-    </dependency>
+<!--    &lt;!&ndash; https://mvnrepository.com/artifact/org.slf4j/slf4j-simple &ndash;&gt;-->
+<!--    <dependency>-->
+<!--      <groupId>org.slf4j</groupId>-->
+<!--      <artifactId>slf4j-api</artifactId>-->
+<!--      <version>2.0.0-alpha1</version>-->
+<!--      <scope>test</scope>-->
+<!--    </dependency>-->
 
-    <!-- https://mvnrepository.com/artifact/org.apache.logging.log4j/log4j-to-slf4j -->
+    <!-- https://mvnrepository.com/artifact/org.apache.logging.log4j/log4j-core -->
     <dependency>
       <groupId>org.apache.logging.log4j</groupId>
-      <artifactId>log4j-to-slf4j</artifactId>
-      <version>2.23.1</version>
+      <artifactId>log4j-core</artifactId>
+      <version>2.20.0</version>
+    </dependency>
+
+    <!-- https://mvnrepository.com/artifact/org.slf4j/slf4j-api -->
+    <dependency>
+      <groupId>org.slf4j</groupId>
+      <artifactId>slf4j-api</artifactId>
+      <version>2.0.0-alpha1</version>
     </dependency>
 
     <!-- https://mvnrepository.com/artifact/org.sonarsource.sonarlint.core/sonarlint-core -->
@@ -196,11 +199,17 @@
       <version>8.18.0.70939</version>
     </dependency>
 
+    <!-- https://mvnrepository.com/artifact/org.springframework/spring-jdbc -->
     <dependency>
-      <groupId>org.projectlombok</groupId>
-      <artifactId>lombok</artifactId>
-      <version>1.18.30</version>
-      <scope>provided</scope>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-jdbc</artifactId>
+      <version>5.3.23</version>
+    </dependency>
+
+    <dependency>
+      <groupId>com.zaxxer</groupId>
+      <artifactId>HikariCP</artifactId>
+      <version>5.0.1</version>
     </dependency>
 
   </dependencies>
@@ -235,9 +244,20 @@
       </plugin>
 
       <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-surefire-plugin</artifactId>
+        <version>3.0.0-M5</version>
+        <configuration>
+          <skipTests>false</skipTests>
+          <testFailureIgnore>true</testFailureIgnore>
+          <forkMode>once</forkMode>
+        </configuration>
+      </plugin>
+
+      <plugin>
         <groupId>org.liquibase</groupId>
         <artifactId>liquibase-maven-plugin</artifactId>
-        <version>4.8.0</version>
+        <version>4.24.0</version>
         <executions>
           <execution>
             <phase>process-resources</phase>

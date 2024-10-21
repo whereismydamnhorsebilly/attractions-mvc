@@ -1,6 +1,7 @@
 package com.springApp.config;
 
-import com.mchange.v2.c3p0.ComboPooledDataSource;
+import com.zaxxer.hikari.HikariConfig;
+import com.zaxxer.hikari.HikariDataSource;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.*;
 import org.springframework.core.env.Environment;
@@ -10,7 +11,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 import javax.sql.DataSource;
-import java.beans.PropertyVetoException;
+
 import java.util.Properties;
 
 @Configuration
@@ -31,18 +32,12 @@ public class ProjectConfig {
 
     @Bean
     public DataSource dataSource() {
-        ComboPooledDataSource dataSource = new ComboPooledDataSource();
-
-        try {
-            dataSource.setDriverClass(environment.getProperty("jdbc.driverClassName"));
-            dataSource.setJdbcUrl(environment.getProperty("jdbc.url"));
-            dataSource.setUser(environment.getProperty("jdbc.user"));
-            dataSource.setPassword(environment.getProperty("jdbc.password"));
-        } catch (PropertyVetoException e) {
-            throw new RuntimeException(e);
-        }
-
-        return dataSource;
+        HikariConfig hikariConfig = new HikariConfig();
+        hikariConfig.setDriverClassName(environment.getProperty("jdbc.driverClassName"));
+        hikariConfig.setJdbcUrl(environment.getProperty("jdbc.url"));
+        hikariConfig.setUsername(environment.getProperty("jdbc.username"));
+        hikariConfig.setPassword(environment.getProperty("jdbc.password"));
+        return new HikariDataSource(hikariConfig);
     }
 
     @Bean

@@ -1,10 +1,8 @@
 package com.springApp.service.serviceOptionService;
 
-import com.springApp.dao.UniversalImp;
 import com.springApp.dao.serviceOptionRepo.ServiceOptionDao;
 import com.springApp.dto.serviceoptionDto.ServiceOptionDtoToGet;
 import com.springApp.mapper.ServiceOptionMapper;
-import com.springApp.model.Attraction;
 import com.springApp.model.ServiceOption;
 import com.springApp.util.ServiceOptionType;
 import org.junit.jupiter.api.Test;
@@ -13,10 +11,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import static junit.framework.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
